@@ -6,12 +6,13 @@ import org.junit.Test;
 
 public class MyLinkedHashMapTest {
 
+    static MyLinkedHashMap<String, Integer> myLinkedHashMap = new MyLinkedHashMap<>();
+
     @Test
     public void givenASentenceWhenWordsAreAddedToListShouldReturnParanoidFrequency() {
         String sentence = "Paranoids are not paranoid because they are paranoid but " +
                 "because they keep putting themselves deliberately into " +
                 "paranoid avoidable situation";
-        MyLinkedHashMap<String, Integer> myLinkedHashMap = new MyLinkedHashMap<>();
         String[] words = sentence.toLowerCase().split(" ");
         for (String word : words) {
             Integer value = myLinkedHashMap.get(word);
@@ -22,5 +23,15 @@ public class MyLinkedHashMapTest {
         System.out.println(myLinkedHashMap);
         int frequency = myLinkedHashMap.get("paranoid");
         Assert.assertEquals(3, frequency);
+    }
+
+    @Test
+    public void givenAHashMapWithWordsFrequencyShouldRemoveGivenWord() {
+        givenASentenceWhenWordsAreAddedToListShouldReturnParanoidFrequency();
+        String wordToBeRemoved="avoidable";
+        if(myLinkedHashMap.get(wordToBeRemoved)!=null){
+            myLinkedHashMap.remove(wordToBeRemoved);
+        }
+        Assert.assertNull(myLinkedHashMap.get(wordToBeRemoved));
     }
 }
